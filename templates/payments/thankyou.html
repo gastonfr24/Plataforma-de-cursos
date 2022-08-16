@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock title %}
+{% block extra_head %}{% endblock extra_head %}
+
+
+{% block navbar %}
+    {% include 'components/navbar.html' %}
+{% endblock navbar %}
+
+
+{% block content %}
+
+
+<!-- component -->
+<!-- https://play.tailwindcss.com/PLrIiZQn2n -->
+
+<div class="relative flex min-h-screen flex-col items-center justify-center overflow-hidden py-6 sm:py-12 bg-white">
+    <div class="max-w-xl px-5 text-center">
+      <h2 class="mb-2 text-[42px] font-bold text-zinc-800">Gracias por Unirte</h2>
+      <p class="mb-2 text-lg text-zinc-500">Disfruta ahora del contenido </p>
+      <p class="mb-2 text-lg text-zinc-500">{% lorem 15 w random %} </p>
+      <a href="{% url 'home' %}" class="mt-3 inline-block w-96 rounded bg-indigo-600 px-5 py-3 font-medium text-white shadow-md shadow-indigo-500/20 hover:bg-indigo-700">Ir a los cursos</a>
+    </div>
+  </div>
+
+
+{% endblock content %}
+
+
+{% block footer %}
+
+{% endblock footer %}
+
+
+{% block javascript %}
+
+{% endblock javascript %}
