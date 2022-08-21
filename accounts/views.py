@@ -6,6 +6,7 @@ from django.views.generic import FormView, View
 from django.contrib import messages
 from django.urls import reverse
 from django.contrib.auth import get_user_model
+from courses.models import Course
 
 import stripe
 
@@ -26,8 +27,13 @@ class CancelSubscriptionView(LoginRequiredMixin, FormView):
 class UserSubscriptionView(View):
     def get(self, request, username, *args, **kwargs):
         user =  get_object_or_404(User, username=username)
-
+        courses = Course.objects.filter(is_active = True)
+        subscription = request.user.subscription
+        pricing_tier = subscription.price
+        print(pricing_tier)
+        courses = Course.objects.filter(is_active = True, pricing_tiers = pricing_tier )
         context = {
-            'user':user
+            'user':user,
+            'courses':courses
         }
         return render(request,"users/user_subscription.html",context)
