@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.views.generic.base import View
 from .models import Course, Chapter, Lesson, Subscription
 from django.shortcuts import redirect, get_object_or_404
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 
@@ -16,7 +17,7 @@ class CourseDetailView(View):
         return render(request, 'courses/pages/course/course_detail.html', context)
 
 
-class ChapterDetailView(View):
+class ChapterDetailView(LoginRequiredMixin,View):
     def get(self,request, course_slug, chapter_number,*args, **kwargs):
 
         course = get_object_or_404(Course, slug = course_slug)
@@ -37,7 +38,7 @@ class ChapterDetailView(View):
         return render(request, 'courses/pages/chapter/chapter_detail.html', context)
 
 
-class LessonDetailView(View):
+class LessonDetailView(LoginRequiredMixin, View):
     def get(self,request, course_slug, chapter_number, lesson_number,*args, **kwargs):
         course = get_object_or_404(Course, slug = course_slug)
         subscription = request.user.subscription
